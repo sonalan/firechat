@@ -1,3 +1,4 @@
+import React, { useRef, useState } from 'react';
 import './App.css';
 
 
@@ -9,9 +10,8 @@ import 'firebase/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import firebaseConfig from './firebase.conf';
 
-
+const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
 
 firebase.initializeApp({
   firebaseConfig
@@ -19,6 +19,7 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
+// eslint-disable-next-line
 const analytics = firebase.analytics();
 
 
@@ -53,6 +54,7 @@ function SignIn() {
 
 }
 
+// eslint-disable-next-line
 function SignOut() {
   return auth.currentUser && (
     <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
@@ -115,7 +117,7 @@ function ChatMessage(props) {
 
   return (<>
     <div className={`message ${messageClass}`}>
-      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} alt="avatar" />
       <p>{text}</p>
     </div>
   </>)
